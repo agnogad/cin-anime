@@ -11,6 +11,7 @@
   const slug = $derived(anime.slug || anime.Slug);
   const cover = $derived(anime.cover || anime.Cover || anime.poster || anime.Poster || '');
   const year = $derived(anime.year || anime.Year || '');
+  const types = $derived(anime.types || []);
 
   const delay = $derived(`${(index || 0) * 50}ms`);
 
@@ -57,8 +58,16 @@
     <h3 class="font-semibold text-sm md:text-base text-zinc-100 line-clamp-2 leading-snug group-hover:text-violet-300 transition-colors">
       {title}
     </h3>
-    {#if year}
-      <p class="text-xs text-zinc-500 mt-1">{year}</p>
-    {/if}
+    <div class="flex items-center gap-2 mt-1.5">
+      {#if year}
+        <span class="text-xs text-zinc-500">{year}</span>
+      {/if}
+      {#if types.includes('sub')}
+        <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-blue-500/15 text-blue-400 border border-blue-500/20">SUB</span>
+      {/if}
+      {#if types.includes('dub')}
+        <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-400 border border-amber-500/20">DUB</span>
+      {/if}
+    </div>
   </div>
 </button>

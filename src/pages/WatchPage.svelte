@@ -44,6 +44,7 @@
   $effect(() => { if (slug) load(); });
 
   const title = $derived(info?.title || info?.Title || slug || 'Bilinmiyor');
+  const types = $derived(info?.types || []);
 
   const currentEpisode = $derived(episodes.find(ep => ep.episode === episodeNum));
 
@@ -116,9 +117,18 @@
         <div class="mt-4 px-1">
           <div class="flex flex-wrap items-start justify-between gap-3">
             <div class="flex-1 min-w-0">
-              <h1 class="text-lg md:text-xl font-bold text-zinc-100 truncate">
-                {title} — EP {episodeNum}
-              </h1>
+              <div class="flex items-center gap-3 flex-wrap">
+                <h1 class="text-lg md:text-xl font-bold text-zinc-100 truncate">
+                  {title} — EP {episodeNum}
+                </h1>
+                <!-- Anime-level type badges -->
+                {#if types.includes('sub')}
+                  <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-blue-500/15 text-blue-400 border border-blue-500/30">SUB</span>
+                {/if}
+                {#if types.includes('dub')}
+                  <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-amber-500/15 text-amber-400 border border-amber-500/30">DUB</span>
+                {/if}
+              </div>
               {#if currentEpisode.title}
                 <p class="text-sm text-zinc-400 mt-0.5">{currentEpisode.title}</p>
               {/if}

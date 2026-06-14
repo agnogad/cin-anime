@@ -63,6 +63,7 @@
   const rating = $derived(info?.rating ?? info?.Rating ?? 0);
   const cover = $derived(info?.cover || info?.Cover || info?.poster || info?.Poster || '');
   const categories = $derived(info?.categories || info?.Categories || []);
+  const types = $derived(info?.types || []);
 
   let coverError = $state(false);
   let bannerError = $state(false);
@@ -151,6 +152,18 @@
                   {cat.charAt(0).toUpperCase() + cat.slice(1)}
                 </a>
               {/each}
+            </div>
+          {/if}
+
+          <!-- Type Badges (Sub/Dub) -->
+          {#if types.length > 0}
+            <div class="flex flex-wrap gap-2 mb-4">
+              {#if types.includes('sub')}
+                <span class="px-3 py-1 rounded-full text-xs font-bold bg-blue-500/15 text-blue-400 border border-blue-500/30">SUB</span>
+              {/if}
+              {#if types.includes('dub')}
+                <span class="px-3 py-1 rounded-full text-xs font-bold bg-amber-500/15 text-amber-400 border border-amber-500/30">DUB</span>
+              {/if}
             </div>
           {/if}
 
