@@ -27,7 +27,7 @@ export async function fetchJson(url) {
  */
 export function proxyImg(url) {
   if (!url) return '';
-  return `https://images.weserv.nl/v1/?url=${encodeURIComponent(url)}&l=9&maxage=1d`;
+  return `https://images.weserv.nl/v1/?url=${encodeURIComponent(url)}&l=9&maxage=1d&output=webp&filename=cover.png`;
 }
 
 /**
