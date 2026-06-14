@@ -4,12 +4,15 @@
   import AnimePage from './pages/AnimePage.svelte';
   import WatchPage from './pages/WatchPage.svelte';
   import CategoryPage from './pages/CategoryPage.svelte';
+  import SearchPage from './pages/SearchPage.svelte';
   import RecentPage from './pages/RecentPage.svelte';
   import EmptyState from './components/EmptyState.svelte';
   import { currentPath } from './lib/stores.js';
 
   // Use store auto-subscription: $currentPath
-  const segments = $derived($currentPath.split('/').filter(Boolean));
+  // Split path and query params properly
+  const pathWithoutQuery = $derived($currentPath.split('?')[0]);
+  const segments = $derived(pathWithoutQuery.split('/').filter(Boolean));
   const route = $derived(segments[0] || 'home');
   const params = $derived({
     slug: segments[1] || '',
@@ -25,8 +28,10 @@
     <AnimePage />
   {:else if route === 'watch' && params.slug && params.episode}
     <WatchPage />
-  {:else if route === 'category' || route === 'categories' || route === 'search'}
+  {:else if route === 'category' || route === 'categories'}
     <CategoryPage />
+  {:else if route === 'search'}
+    <SearchPage />
   {:else if route === 'recent'}
     <RecentPage />
   {:else}
