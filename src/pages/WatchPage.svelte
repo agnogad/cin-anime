@@ -5,6 +5,7 @@
   import ErrorDisplay from '../components/ErrorDisplay.svelte';
   import { fetchJson, animeInfoUrl, animeEpisodesUrl, normalizeEpisodes } from '../lib/api.js';
   import { router } from '../lib/stores.js';
+  import { addToHistory } from '../lib/history.js';
 
   let slug = $state('');
   let episodeNum = $state(1);
@@ -47,6 +48,19 @@
   const types = $derived(info?.types || []);
 
   const currentEpisode = $derived(episodes.find(ep => ep.episode === episodeNum));
+
+  // Save to watch history when episode data loads
+  $effect(() => {
+    if (info && currentEpisode && slug) {
+      addToHistory({
+        slug,
+        title: info.title || info.Title || slug,
+        cover: info.cover || info.Cover || info.poster || info.Poster || '',
+        episode: episodeNum,
+        episodeTitle: currentEpisode.title || '',
+      });
+    }
+  });
 
   let activeProviderIdx = $state(0);
 

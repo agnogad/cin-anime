@@ -4,8 +4,6 @@
   import AnimePage from './pages/AnimePage.svelte';
   import WatchPage from './pages/WatchPage.svelte';
   import CategoryPage from './pages/CategoryPage.svelte';
-  import CategoriesListPage from './pages/CategoriesListPage.svelte';
-  import SearchPage from './pages/SearchPage.svelte';
   import RecentPage from './pages/RecentPage.svelte';
   import EmptyState from './components/EmptyState.svelte';
   import { currentPath } from './lib/stores.js';
@@ -27,12 +25,8 @@
     <AnimePage />
   {:else if route === 'watch' && params.slug && params.episode}
     <WatchPage />
-  {:else if route === 'category' && params.name}
+  {:else if route === 'category' || route === 'categories' || route === 'search'}
     <CategoryPage />
-  {:else if route === 'categories'}
-    <CategoriesListPage />
-  {:else if route === 'search'}
-    <SearchPage />
   {:else if route === 'recent'}
     <RecentPage />
   {:else}

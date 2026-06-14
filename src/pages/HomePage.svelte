@@ -6,6 +6,7 @@
   import EmptyState from '../components/EmptyState.svelte';
   import { fetchJson, API_ANIMES, normalizeAnimes } from '../lib/api.js';
   import { router } from '../lib/stores.js';
+  import { getHistory } from '../lib/history.js';
 
   let animes = $state([]);
   let loading = $state(true);
@@ -34,6 +35,18 @@
       return dateB.localeCompare(dateA);
     }).slice(0, 10)
   );
+
+  const watchHistory = $derived(getHistory().slice(0, 8));
+
+  const subAnimes = $derived(animes.filter(a => {
+    const types = a.types || [];
+    return types.includes('sub');
+  }));
+
+  const dubAnimes = $derived(animes.filter(a => {
+    const types = a.types || [];
+    return types.includes('dub');
+  }));
 
   const animeCategories = $derived.by(() => {
     const cats = new Set();
@@ -96,6 +109,41 @@
         </div>
       </form>
 
+      <!-- Watch History -->
+      {#if watchHistory.length > 0}
+        <section>
+          <div class="flex items-center justify-between gap-3 mb-5">
+            <div class="flex items-center gap-3">
+              <div class="w-1 h-6 bg-violet-500 rounded-full"></div>
+              <h2 class="text-xl md:text-2xl font-bold text-zinc-100">🕐 Kaldığın Yerden</h2>
+            </div>
+            <a href="#/recent" class="text-xs text-violet-400 hover:text-violet-300 transition-colors">Tümünü Gör</a>
+          </div>
+          <div class="flex gap-4 overflow-x-auto pb-2 -mx-4 px-4 md:mx-0 md:px-0 scrollbar-none snap-x snap-mandatory">
+            {#each watchHistory as item}
+              <a
+                href="#/watch/{item.slug}/{item.episode}"
+                class="flex-shrink-0 w-36 md:w-40 snap-start group"
+              >
+                <div class="aspect-[3/4] rounded-xl overflow-hidden bg-zinc-800 relative shadow-lg shadow-black/30">
+                  {#if item.cover}
+                    <img src={item.cover} alt={item.title} class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" onerror={(e) => e.target.style.display = 'none'} />
+                  {/if}
+                  <div class="absolute inset-0 bg-gradient-to-t from-zinc-900/80 via-transparent to-transparent"></div>
+                  <div class="absolute bottom-2 left-2 right-2">
+                    <p class="text-xs font-semibold text-white truncate drop-shadow-lg">{item.title}</p>
+                    <p class="text-[10px] text-zinc-300 mt-0.5">Bölüm {item.episode}</p>
+                  </div>
+                  <div class="absolute top-2 right-2 bg-violet-600/90 text-white text-[9px] font-bold px-1.5 py-0.5 rounded-full">
+                    DEVAM
+                  </div>
+                </div>
+              </a>
+            {/each}
+          </div>
+        </section>
+      {/if}
+
       <!-- Trending Section -->
       {#if trending.length > 0}
         <section>
@@ -145,6 +193,58 @@
           {/each}
         </div>
       </section>
+
+      <!-- Sub Animes -->
+      {#if subAnimes.length > 0}
+        <section>
+          <a href="#/category?type=sub" class="flex items-center gap-3 mb-5 group">
+            <div class="w-1 h-6 bg-blue-500 rounded-full"></div>
+            <h2 class="text-xl md:text-2xl font-bold text-zinc-100 group-hover:text-blue-300 transition-colors">🎧 Altyazılı Animeler</h2>
+            <svg class="w-4 h-4 text-zinc-600 group-hover:text-blue-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </a>
+          <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6">
+            {#each subAnimes.slice(0, 10) as anime, i}
+              <AnimeCard {anime} index={i} />
+            {/each}
+          </div>
+          {#if subAnimes.length > 10}
+            <a href="#/category?type=sub" class="inline-flex items-center gap-2 mt-4 text-sm text-blue-400 hover:text-blue-300 transition-colors">
+              Tümünü Gör ({subAnimes.length})
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </a>
+          {/if}
+        </section>
+      {/if}
+
+      <!-- Dub Animes -->
+      {#if dubAnimes.length > 0}
+        <section>
+          <a href="#/category?type=dub" class="flex items-center gap-3 mb-5 group">
+            <div class="w-1 h-6 bg-amber-500 rounded-full"></div>
+            <h2 class="text-xl md:text-2xl font-bold text-zinc-100 group-hover:text-amber-300 transition-colors">🎙️ Dublaj Animeler</h2>
+            <svg class="w-4 h-4 text-zinc-600 group-hover:text-amber-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </a>
+          <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6">
+            {#each dubAnimes.slice(0, 10) as anime, i}
+              <AnimeCard {anime} index={i} />
+            {/each}
+          </div>
+          {#if dubAnimes.length > 10}
+            <a href="#/category?type=dub" class="inline-flex items-center gap-2 mt-4 text-sm text-amber-400 hover:text-amber-300 transition-colors">
+              Tümünü Gör ({dubAnimes.length})
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </a>
+          {/if}
+        </section>
+      {/if}
 
       <!-- All Anime -->
       <section>
