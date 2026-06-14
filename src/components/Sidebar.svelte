@@ -4,8 +4,8 @@
   let { categories = [] } = $props();
 
   const navItems = [
-    { path: '/', label: 'Home', icon: 'M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6' },
-    { path: '/search', label: 'Search', icon: 'M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z' },
+    { path: '/', label: 'Ana Sayfa', icon: 'M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6' },
+    { path: '/search', label: 'Ara', icon: 'M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z' },
   ];
 
   // Use $currentPath from store auto-subscription
@@ -40,7 +40,7 @@
 
     <!-- Categories Section -->
     <div class="pt-5 pb-2">
-      <p class="px-3 text-[11px] font-semibold uppercase tracking-widest text-zinc-600">Categories</p>
+      <p class="px-3 text-[11px] font-semibold uppercase tracking-widest text-zinc-600">Kategoriler</p>
     </div>
     {#if categories.length > 0}
       {#each categories as cat}

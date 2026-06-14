@@ -61,8 +61,8 @@
 
     {#if filtered.length === 0}
       <EmptyState
-        title='No anime in "{displayName}"'
-        description="Try browsing other categories."
+        title='"{displayName}" kategorisinde anime bulunamadı'
+        description="Diğer kategorilere göz atın."
       />
     {:else}
       <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6">

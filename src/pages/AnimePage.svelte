@@ -56,7 +56,7 @@
     }
   });
 
-  const title = $derived(info?.title || info?.Title || 'Unknown');
+  const title = $derived(info?.title || info?.Title || 'Bilinmiyor');
   const description = $derived(info?.description || info?.Description || '');
   const year = $derived(info?.year || info?.Year || '');
   const status = $derived((info?.status || info?.Status || 'ongoing').toLowerCase());
@@ -121,7 +121,7 @@
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
               <path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z" />
             </svg>
-            {episodes.length > 0 ? 'Start Watching' : 'No Episodes'}
+            {episodes.length > 0 ? 'İzlemeye Başla' : 'Bölüm Yok'}
           </button>
         </div>
 
@@ -157,7 +157,7 @@
           <!-- Description -->
           {#if description}
             <div class="mb-6">
-              <h3 class="text-sm font-semibold text-zinc-400 uppercase tracking-wider mb-2">Synopsis</h3>
+              <h3 class="text-sm font-semibold text-zinc-400 uppercase tracking-wider mb-2">Özet</h3>
               <p class="text-sm md:text-base text-zinc-300 leading-relaxed">{description}</p>
             </div>
           {/if}
@@ -171,7 +171,7 @@
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
               <path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z" />
             </svg>
-            {episodes.length > 0 ? 'Start Watching' : 'No Episodes'}
+            {episodes.length > 0 ? 'İzlemeye Başla' : 'Bölüm Yok'}
           </button>
         </div>
       </div>
@@ -181,10 +181,10 @@
         <div class="flex items-center gap-3 mb-5">
           <div class="w-1 h-6 bg-violet-500 rounded-full"></div>
           <h2 class="text-xl md:text-2xl font-bold text-zinc-100">
-            Episodes
+            Bölümler
           </h2>
           {#if !epLoading && episodes.length > 0}
-            <span class="text-sm text-zinc-500 font-medium">{episodes.length} total</span>
+            <span class="text-sm text-zinc-500 font-medium">{episodes.length} toplam</span>
           {/if}
         </div>
 
@@ -193,7 +193,7 @@
         {:else if epError}
           <ErrorDisplay message={epError} onretry={loadEpisodes} />
         {:else if episodes.length === 0}
-          <EmptyState title="No episodes yet" description="Episodes may be added soon. Check back later!" />
+          <EmptyState title="Henüz bölüm yok" description="Yeni bölümler yakında eklenecek. Daha sonra tekrar kontrol edin!" />
         {:else}
           <div class="grid gap-2 max-w-3xl">
             {#each episodes as ep}
@@ -231,7 +231,7 @@
                       <span class="text-[11px] text-zinc-600">{ep.releaseDate}</span>
                     {/if}
                     {#if ep.streams?.length > 0}
-                      <span class="text-[11px] text-zinc-600">{ep.streams.length} server{ep.streams.length > 1 ? 's' : ''}</span>
+                      <span class="text-[11px] text-zinc-600">{ep.streams.length} sunucu</span>
                     {/if}
                   </div>
                 </div>

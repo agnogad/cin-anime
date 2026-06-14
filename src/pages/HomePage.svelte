@@ -72,7 +72,7 @@
   </div>
 {:else if animes.length === 0}
   <div class="p-4 md:p-8">
-    <EmptyState title="No anime found" description="Check back later for new releases!" />
+    <EmptyState title="Anime bulunamadı" description="Yeni bölümler için daha sonra tekrar kontrol edin!" />
   </div>
 {:else}
   <div class="animate-fade-in">
@@ -90,7 +90,7 @@
           <input
             type="text"
             bind:value={searchQuery}
-            placeholder="Search anime..."
+            placeholder="Anime ara..."
             class="w-full pl-10 pr-4 py-3 bg-zinc-900 border border-zinc-800 rounded-xl text-sm text-zinc-200 placeholder-zinc-600 focus:outline-none focus:ring-2 focus:ring-violet-500/50 focus:border-violet-500/50 transition-all"
           />
         </div>
@@ -101,7 +101,7 @@
         <section>
           <div class="flex items-center gap-3 mb-5">
             <div class="w-1 h-6 bg-violet-500 rounded-full"></div>
-            <h2 class="text-xl md:text-2xl font-bold text-zinc-100">🔥 Trending Now</h2>
+            <h2 class="text-xl md:text-2xl font-bold text-zinc-100">🔥 Popülerler</h2>
           </div>
           <div class="flex gap-4 overflow-x-auto pb-2 -mx-4 px-4 md:mx-0 md:px-0 scrollbar-none snap-x snap-mandatory">
             {#each trending as anime, i}
@@ -118,7 +118,7 @@
         <section>
           <div class="flex items-center gap-3 mb-4">
             <div class="w-1 h-6 bg-violet-500 rounded-full"></div>
-            <h2 class="text-xl md:text-2xl font-bold text-zinc-100">Browse Categories</h2>
+            <h2 class="text-xl md:text-2xl font-bold text-zinc-100">Kategorilere Göz At</h2>
           </div>
           <div class="flex flex-wrap gap-2">
             {#each animeCategories as cat}
@@ -137,7 +137,7 @@
       <section>
         <div class="flex items-center gap-3 mb-5">
           <div class="w-1 h-6 bg-violet-500 rounded-full"></div>
-          <h2 class="text-xl md:text-2xl font-bold text-zinc-100">📺 Latest Releases</h2>
+          <h2 class="text-xl md:text-2xl font-bold text-zinc-100">📺 Son Eklenenler</h2>
         </div>
         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6">
           {#each recent as anime, i}
@@ -150,7 +150,7 @@
       <section>
         <div class="flex items-center gap-3 mb-5">
           <div class="w-1 h-6 bg-violet-500 rounded-full"></div>
-          <h2 class="text-xl md:text-2xl font-bold text-zinc-100">📂 All Anime</h2>
+          <h2 class="text-xl md:text-2xl font-bold text-zinc-100">📂 Tüm Animeler</h2>
         </div>
         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6">
           {#each animes as anime, i}

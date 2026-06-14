@@ -43,7 +43,7 @@
 
   $effect(() => { if (slug) load(); });
 
-  const title = $derived(info?.title || info?.Title || slug || 'Unknown');
+  const title = $derived(info?.title || info?.Title || slug || 'Bilinmiyor');
 
   const currentEpisode = $derived(episodes.find(ep => ep.episode === episodeNum));
 
@@ -106,7 +106,7 @@
                 <svg class="w-12 h-12 text-zinc-700 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15.75 10.5l4.72-4.72a.75.75 0 011.28.53v11.38a.75.75 0 01-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 002.25-2.25v-9a2.25 2.25 0 00-2.25-2.25h-9A2.25 2.25 0 002.25 7.5v9a2.25 2.25 0 002.25 2.25z" />
                 </svg>
-                <p class="text-zinc-500 text-sm">No stream available</p>
+                <p class="text-zinc-500 text-sm">Yayın mevcut değil</p>
               </div>
             </div>
           {/if}
@@ -132,14 +132,14 @@
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                 </svg>
-                <span class="hidden sm:inline">Prev</span>
+                <span class="hidden sm:inline">Önceki</span>
               </button>
               <button
                 onclick={() => handleEpisodeSelect(episodeNum + 1)}
                 disabled={!nextEpisode}
                 class="px-3 py-2 {nextEpisode ? 'bg-zinc-800/80 hover:bg-zinc-700/80' : 'bg-zinc-800/30 opacity-30 cursor-not-allowed'} rounded-lg text-zinc-300 transition-colors text-sm flex items-center gap-1.5"
               >
-                <span class="hidden sm:inline">Next</span>
+                <span class="hidden sm:inline">Sonraki</span>
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>
@@ -150,7 +150,7 @@
           <!-- Provider Selector -->
           {#if currentEpisode.streams?.length > 0}
             <div class="mt-4">
-              <p class="text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-2.5">Stream Servers</p>
+              <p class="text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-2.5">Yayın Sunucuları</p>
               <ProviderSelector
                 streams={currentEpisode.streams}
                 activeProvider={activeProviderIdx}
@@ -171,8 +171,8 @@
       <!-- Episode List Sidebar -->
       <div class="w-full lg:w-80 flex-shrink-0">
         <div class="flex items-center justify-between mb-3">
-          <h2 class="text-sm font-semibold text-zinc-400 uppercase tracking-wider">Episodes</h2>
-          <span class="text-xs text-zinc-600">{episodes.length} total</span>
+          <h2 class="text-sm font-semibold text-zinc-400 uppercase tracking-wider">Bölümler</h2>
+          <span class="text-xs text-zinc-600">{episodes.length} toplam</span>
         </div>
 
         <!-- Quick Nav -->
@@ -185,14 +185,14 @@
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
-            Previous
+            Önceki
           </button>
           <button
             onclick={() => handleEpisodeSelect(episodeNum + 1)}
             disabled={!nextEpisode}
             class="flex-1 py-2 text-center {nextEpisode ? 'bg-zinc-800/80 hover:bg-zinc-700/80' : 'bg-zinc-800/30 opacity-30 cursor-not-allowed'} rounded-lg text-zinc-300 text-sm font-medium transition-colors flex items-center justify-center gap-1.5"
           >
-            Next
+            Sonraki
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>

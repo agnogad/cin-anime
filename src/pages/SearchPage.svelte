@@ -64,7 +64,7 @@
       <input
         type="text"
         bind:value={localQuery}
-        placeholder="Search anime by title..."
+        placeholder="Anime adıyla ara..."
         class="w-full pl-12 pr-4 py-3.5 bg-zinc-900 border border-zinc-800 rounded-xl text-base text-zinc-200 placeholder-zinc-600 focus:outline-none focus:ring-2 focus:ring-violet-500/50 focus:border-violet-500/50 transition-all"
       />
     </div>
@@ -80,14 +80,14 @@
   {:else if query}
     <div class="flex items-center gap-3 mb-6">
       <div class="w-1 h-6 bg-violet-500 rounded-full"></div>
-      <h2 class="text-xl font-bold text-zinc-100">Results for "{query}"</h2>
+      <h2 class="text-xl font-bold text-zinc-100">"{query}" için sonuçlar</h2>
       <span class="text-sm text-zinc-500 font-medium">({results.length})</span>
     </div>
 
     {#if results.length === 0}
       <EmptyState
-        title='No results for "{query}"'
-        description="Try a different search term or browse categories."
+        title='"{query}" için sonuç bulunamadı'
+        description="Farklı bir arama terimi deneyin veya kategorilere göz atın."
       />
     {:else}
       <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6">
@@ -101,9 +101,9 @@
       <svg class="w-16 h-16 text-zinc-700 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
       </svg>
-      <h3 class="text-lg font-semibold text-zinc-400 mb-2">Search Anime</h3>
+      <h3 class="text-lg font-semibold text-zinc-400 mb-2">Anime Ara</h3>
       <p class="text-zinc-600 text-sm max-w-md mx-auto">
-        Type in the search bar above to find your favorite anime by title or description.
+        Favori animelerinizi başlık veya açıklama ile bulmak için yukarıdaki arama çubuğunu kullanın.
       </p>
     </div>
   {/if}

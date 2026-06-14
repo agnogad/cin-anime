@@ -1,5 +1,5 @@
 <script>
-  let { title = 'No results found', description = 'Try adjusting your search or filters.' } = $props();
+  let { title = 'Sonuç bulunamadı', description = 'Aramanızı veya filtrelerinizi değiştirmeyi deneyin.' } = $props();
 </script>
 
 <div class="flex flex-col items-center justify-center py-16 px-4 text-center">

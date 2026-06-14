@@ -5,7 +5,7 @@
 
   let { anime = {}, index = 0 } = $props();
 
-  const title = $derived(anime.title || anime.Title || 'Untitled');
+  const title = $derived(anime.title || anime.Title || 'İsimsiz');
   const rating = $derived(anime.rating ?? anime.Rating ?? 0);
   const status = $derived((anime.status || anime.Status || 'ongoing').toLowerCase());
   const slug = $derived(anime.slug || anime.Slug);

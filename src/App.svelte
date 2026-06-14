@@ -37,12 +37,12 @@
     <RecentPage />
   {:else}
     <div class="p-8 text-center">
-      <EmptyState title="Page not found" description="The page you're looking for doesn't exist." />
+      <EmptyState title="Sayfa bulunamadı" description="Aradığınız sayfa mevcut değil." />
       <a
         href="#/"
         class="inline-flex items-center gap-2 px-6 py-3 bg-violet-600 hover:bg-violet-500 text-white rounded-xl text-sm font-semibold transition-all mt-4"
       >
-        Go Home
+        Ana Sayfaya Dön
       </a>
     </div>
   {/if}

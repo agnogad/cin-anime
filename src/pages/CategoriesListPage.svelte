@@ -45,11 +45,11 @@
   {:else}
     <div class="flex items-center gap-3 mb-6">
       <div class="w-1 h-7 bg-violet-500 rounded-full"></div>
-      <h1 class="text-2xl md:text-3xl font-bold text-zinc-100">Categories</h1>
+      <h1 class="text-2xl md:text-3xl font-bold text-zinc-100">Kategoriler</h1>
     </div>
 
     {#if categories.length === 0}
-      <EmptyState title="No categories found" />
+      <EmptyState title="Kategori bulunamadı" />
     {:else}
       <div class="flex flex-wrap gap-3">
         {#each categories as cat}

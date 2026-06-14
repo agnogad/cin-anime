@@ -9,5 +9,5 @@
   <span
     class="w-1.5 h-1.5 rounded-full {isOngoing ? 'bg-emerald-400' : 'bg-zinc-500'}"
   />
-  {isOngoing ? 'Ongoing' : 'Completed'}
+  {isOngoing ? 'Devam Ediyor' : 'Tamamlandı'}
 </span>
