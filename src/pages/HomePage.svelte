@@ -194,70 +194,43 @@
         </div>
       </section>
 
-      <!-- Sub Animes -->
+      <!-- Sub Animes (tam liste) -->
       {#if subAnimes.length > 0}
         <section>
           <a href="#/category?type=sub" class="flex items-center gap-3 mb-5 group">
             <div class="w-1 h-6 bg-blue-500 rounded-full"></div>
             <h2 class="text-xl md:text-2xl font-bold text-zinc-100 group-hover:text-blue-300 transition-colors">🎧 Altyazılı Animeler</h2>
+            <span class="text-sm text-zinc-500 font-medium">({subAnimes.length})</span>
             <svg class="w-4 h-4 text-zinc-600 group-hover:text-blue-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
           </a>
           <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6">
-            {#each subAnimes.slice(0, 10) as anime, i}
+            {#each subAnimes as anime, i}
               <AnimeCard {anime} index={i} />
             {/each}
           </div>
-          {#if subAnimes.length > 10}
-            <a href="#/category?type=sub" class="inline-flex items-center gap-2 mt-4 text-sm text-blue-400 hover:text-blue-300 transition-colors">
-              Tümünü Gör ({subAnimes.length})
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </a>
-          {/if}
         </section>
       {/if}
 
-      <!-- Dub Animes -->
+      <!-- Dub Animes (tam liste) -->
       {#if dubAnimes.length > 0}
         <section>
           <a href="#/category?type=dub" class="flex items-center gap-3 mb-5 group">
             <div class="w-1 h-6 bg-amber-500 rounded-full"></div>
             <h2 class="text-xl md:text-2xl font-bold text-zinc-100 group-hover:text-amber-300 transition-colors">🎙️ Dublaj Animeler</h2>
+            <span class="text-sm text-zinc-500 font-medium">({dubAnimes.length})</span>
             <svg class="w-4 h-4 text-zinc-600 group-hover:text-amber-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
           </a>
           <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6">
-            {#each dubAnimes.slice(0, 10) as anime, i}
+            {#each dubAnimes as anime, i}
               <AnimeCard {anime} index={i} />
             {/each}
           </div>
-          {#if dubAnimes.length > 10}
-            <a href="#/category?type=dub" class="inline-flex items-center gap-2 mt-4 text-sm text-amber-400 hover:text-amber-300 transition-colors">
-              Tümünü Gör ({dubAnimes.length})
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </a>
-          {/if}
         </section>
       {/if}
-
-      <!-- All Anime -->
-      <section>
-        <div class="flex items-center gap-3 mb-5">
-          <div class="w-1 h-6 bg-violet-500 rounded-full"></div>
-          <h2 class="text-xl md:text-2xl font-bold text-zinc-100">📂 Tüm Animeler</h2>
-        </div>
-        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6">
-          {#each animes as anime, i}
-            <AnimeCard {anime} index={i} />
-          {/each}
-        </div>
-      </section>
     </div>
   </div>
 {/if}
