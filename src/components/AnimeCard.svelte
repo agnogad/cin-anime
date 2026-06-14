@@ -2,6 +2,7 @@
   import StatusBadge from './StatusBadge.svelte';
   import RatingBadge from './RatingBadge.svelte';
   import { router } from '../lib/stores.js';
+  import { proxyImg } from '../lib/api.js';
 
   let { anime = {}, index = 0 } = $props();
 
@@ -31,7 +32,7 @@
   <div class="relative aspect-[3/4] overflow-hidden bg-zinc-800">
     {#if cover && !imgError}
       <img
-        src={cover}
+        src={proxyImg(cover)}
         alt={title}
         class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
         loading="lazy"

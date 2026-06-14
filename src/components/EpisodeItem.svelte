@@ -1,4 +1,6 @@
 <script>
+  import { proxyImg } from '../lib/api.js';
+
   let { episode, slug, currentEpisode, onselect } = $props();
 
   const isActive = $derived(currentEpisode === episode.episode);
@@ -12,7 +14,7 @@
   <!-- Thumbnail -->
   <div class="w-24 h-14 rounded-lg overflow-hidden bg-zinc-800 flex-shrink-0 relative">
     {#if episode.thumbnail && !thumbError}
-      <img src={episode.thumbnail} alt="" class="w-full h-full object-cover" loading="lazy" onerror={() => thumbError = true} />
+      <img src={proxyImg(episode.thumbnail)} alt="" class="w-full h-full object-cover" loading="lazy" onerror={() => thumbError = true} />
     {/if}
     {#if episode.duration}
       <span class="absolute bottom-1 right-1 text-[10px] font-medium bg-black/70 text-zinc-300 px-1.5 py-0.5 rounded">

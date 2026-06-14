@@ -20,6 +20,16 @@ export async function fetchJson(url) {
 }
 
 /**
+ * Proxy image URL through wsrv.nl for optimization and caching.
+ * @param {string} url - Original image URL
+ * @returns {string} Proxied URL or empty string if no URL
+ */
+export function proxyImg(url) {
+  if (!url) return '';
+  return `https://wsrv.nl/?url=${encodeURIComponent(url)}&l=9&maxage=1d`;
+}
+
+/**
  * Normalize anime list from various response shapes.
  */
 export function normalizeAnimes(raw) {

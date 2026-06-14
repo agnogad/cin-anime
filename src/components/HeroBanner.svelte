@@ -2,6 +2,7 @@
   import StatusBadge from './StatusBadge.svelte';
   import RatingBadge from './RatingBadge.svelte';
   import { router } from '../lib/stores.js';
+  import { proxyImg } from '../lib/api.js';
 
   let { anime = {} } = $props();
 
@@ -20,7 +21,7 @@
   <!-- Background -->
   {#if banner && !bannerError}
     <img
-      src={banner}
+      src={proxyImg(banner)}
       alt=""
       class="absolute inset-0 w-full h-full object-cover"
       onerror={() => bannerError = true}
