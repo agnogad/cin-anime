@@ -4,7 +4,7 @@
   import Skeleton from '../components/Skeleton.svelte';
   import ErrorDisplay from '../components/ErrorDisplay.svelte';
   import EmptyState from '../components/EmptyState.svelte';
-  import { fetchJson, animeInfoUrl, animeEpisodesUrl, normalizeEpisodes, proxyImg } from '../lib/api.js';
+  import { fetchJson, animeInfoUrl, animeEpisodesUrl, normalizeEpisodes, proxyImg, onImgError } from '../lib/api.js';
   import { router, currentPath } from '../lib/stores.js';
 
   let info = $state(null);
@@ -92,7 +92,7 @@
     <!-- Banner background -->
     {#if info.banner && !bannerError}
       <div class="relative h-48 md:h-64 overflow-hidden">
-        <img src={proxyImg(info.banner)} alt="" class="w-full h-full object-cover" onerror={() => bannerError = true} />
+        <img src={proxyImg(info.banner)} alt="" class="w-full h-full object-cover" onerror={(e) => onImgError(e, info.banner)} />
         <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/60 to-transparent"></div>
       </div>
     {/if}
@@ -103,7 +103,7 @@
         <div class="w-40 md:w-64 flex-shrink-0 mx-auto md:mx-0">
           <div class="aspect-[3/4] rounded-xl overflow-hidden bg-zinc-800 shadow-xl shadow-black/40 border border-zinc-800/60">
             {#if cover && !coverError}
-              <img src={proxyImg(cover)} alt={title} class="w-full h-full object-cover" onerror={() => coverError = true} />
+              <img src={proxyImg(cover)} alt={title} class="w-full h-full object-cover" onerror={(e) => onImgError(e, cover)} />
             {:else}
               <div class="w-full h-full flex items-center justify-center bg-zinc-800">
                 <svg class="w-12 h-12 text-zinc-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -217,7 +217,7 @@
                 <!-- Thumbnail -->
                 <div class="w-28 h-16 rounded-lg overflow-hidden bg-zinc-800 flex-shrink-0 relative">
                   {#if ep.thumbnail}
-                    <img src={proxyImg(ep.thumbnail)} alt="" class="w-full h-full object-cover" loading="lazy" onerror={(e) => e.target.style.display = 'none'} />
+                    <img src={proxyImg(ep.thumbnail)} alt="" class="w-full h-full object-cover" loading="lazy" onerror={(e) => onImgError(e, ep.thumbnail)} />
                   {/if}
                   {#if ep.duration}
                     <span class="absolute bottom-1 right-1 text-[10px] font-medium bg-black/70 text-zinc-300 px-1.5 py-0.5 rounded">

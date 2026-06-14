@@ -4,7 +4,7 @@
   import Skeleton from '../components/Skeleton.svelte';
   import ErrorDisplay from '../components/ErrorDisplay.svelte';
   import EmptyState from '../components/EmptyState.svelte';
-  import { fetchJson, API_ANIMES, normalizeAnimes, proxyImg } from '../lib/api.js';
+  import { fetchJson, API_ANIMES, normalizeAnimes, proxyImg, onImgError } from '../lib/api.js';
   import { router } from '../lib/stores.js';
   import { getHistory } from '../lib/history.js';
 
@@ -127,7 +127,7 @@
               >
                 <div class="aspect-[3/4] rounded-xl overflow-hidden bg-zinc-800 relative shadow-lg shadow-black/30">
                   {#if item.cover}
-                    <img src={proxyImg(item.cover)} alt={item.title} class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" onerror={(e) => e.target.style.display = 'none'} />
+                    <img src={proxyImg(item.cover)} alt={item.title} class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" onerror={(e) => onImgError(e, item.cover)} />
                   {/if}
                   <div class="absolute inset-0 bg-gradient-to-t from-zinc-900/80 via-transparent to-transparent"></div>
                   <div class="absolute bottom-2 left-2 right-2">

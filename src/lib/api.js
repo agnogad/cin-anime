@@ -20,13 +20,24 @@ export async function fetchJson(url) {
 }
 
 /**
- * Proxy image URL through wsrv.nl for optimization and caching.
+ * Proxy image URL through images.weserv.nl for optimization and caching.
+ * Falls back to original URL if proxy fails.
  * @param {string} url - Original image URL
  * @returns {string} Proxied URL or empty string if no URL
  */
 export function proxyImg(url) {
   if (!url) return '';
-  return `https://wsrv.nl/?url=${encodeURIComponent(url)}&l=9&maxage=1d`;
+  return `https://images.weserv.nl/v1/?url=${encodeURIComponent(url)}&l=9&maxage=1d`;
+}
+
+/**
+ * Handles image load error: replaces src with original URL.
+ * Use as: onerror={(e) => onImgError(e, 'https://original.url')}
+ */
+export function onImgError(event, originalUrl) {
+  if (originalUrl && event.target.src !== originalUrl) {
+    event.target.src = originalUrl;
+  }
 }
 
 /**

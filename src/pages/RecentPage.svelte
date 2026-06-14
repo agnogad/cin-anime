@@ -1,7 +1,7 @@
 <script>
   import EmptyState from '../components/EmptyState.svelte';
   import { getHistory, clearHistory, removeFromHistory } from '../lib/history.js';
-  import { proxyImg } from '../lib/api.js';
+  import { proxyImg, onImgError } from '../lib/api.js';
   import { router } from '../lib/stores.js';
 
   let history = $state([]);
@@ -58,7 +58,7 @@
           <!-- Cover thumbnail -->
           <div class="w-16 h-20 md:w-20 md:h-24 rounded-lg overflow-hidden bg-zinc-800 flex-shrink-0">
             {#if item.cover}
-              <img src={proxyImg(item.cover)} alt="" class="w-full h-full object-cover" loading="lazy" onerror={(e) => e.target.style.display = 'none'} />
+              <img src={proxyImg(item.cover)} alt="" class="w-full h-full object-cover" loading="lazy" onerror={(e) => onImgError(e, item.cover)} />
             {/if}
           </div>
 

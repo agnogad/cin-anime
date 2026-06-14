@@ -2,7 +2,7 @@
   import StatusBadge from './StatusBadge.svelte';
   import RatingBadge from './RatingBadge.svelte';
   import { router } from '../lib/stores.js';
-  import { proxyImg } from '../lib/api.js';
+  import { proxyImg, onImgError } from '../lib/api.js';
 
   let { anime = {}, index = 0 } = $props();
 
@@ -36,7 +36,7 @@
         alt={title}
         class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
         loading="lazy"
-        onerror={() => imgError = true}
+        onerror={(e) => onImgError(e, cover)}
       />
     {:else}
       <div class="w-full h-full flex items-center justify-center bg-zinc-800">
